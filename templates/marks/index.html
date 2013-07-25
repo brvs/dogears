@@ -1,0 +1,39 @@
+
+{% extends "marks/_layout.html" %}
+
+{% block title %}
+  {{ block.super }} | {{ user }}
+{% endblock %}
+
+{% block container %}
+
+<h3>Buttons</h3>
+
+{% include "marks/_bookmarklet.html" %}
+
+<h3>Bookmarks</h3>
+
+<form action="/add/" method="post">
+{% csrf_token %}
+{{ bookmark_form.as_p }}
+<input type="submit" class="pure-button pure-button-primary" value="Add"/>
+</form>
+
+<ul>
+{% for bookmark in bookmarks %}
+<li>
+  <a href="{{ bookmark.url }}">{{ bookmark.title }}</a>
+  <form action="/delete/" method="post">
+    {% csrf_token %}
+    <input type="submit" class="pure-button" value="&times;"/>
+    <input type="hidden" name="id" value="{{ bookmark.pk }}" />
+  </form>
+</li>
+{% endfor %}
+</ul>
+
+<hr/>
+{{ site }}
+
+
+{% endblock %}

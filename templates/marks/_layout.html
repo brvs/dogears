@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      {% block title %} Dogears {% endblock %}
+    </title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.1/pure-min.css">
+  </head>
+  <body>
+    <nav>
+      <p>Logged in as: {{ user }}</p>
+      <ul>
+        <li><a href="/">Bookmarks list</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/logout">Logout</a></li>
+        <li><a href="/register">Register</a></li>
+      </ul>
+    </nav>
+    <div class="pure-g-r">
+      <div class="pure-u-1">
+        <div style="padding: 1em">
+        {% block container %} {% endblock %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

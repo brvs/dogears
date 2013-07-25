@@ -1,10 +1,14 @@
 from django.conf.urls import patterns, include, url
+from django.contrib import admin
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+import marks.urls
+from marks.models import Bookmark
 
-urlpatterns = patterns('',
+admin.autodiscover()
+admin.site.register(Bookmark)
+
+urlpatterns = patterns(
+    '',
     # Examples:
     # url(r'^$', 'dogear.views.home', name='home'),
     # url(r'^dogear/', include('dogear.foo.urls')),
@@ -13,5 +17,6 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'', include(marks.urls))
 )

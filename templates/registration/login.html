@@ -1,0 +1,22 @@
+{% extends "marks/_layout.html" %}
+
+{% block container %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+{% csrf_token %}
+<table>
+  {{ form.as_p }}
+</table>
+
+<input class="pure-button pure-button-primary" type="submit" value="login" />
+<input type="hidden" name="next" value="/" />
+</form>
+
+<a href="/register">Not registered?</a>
+
+{% endblock %}
+

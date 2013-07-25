@@ -1,0 +1,18 @@
+{% extends "marks/_layout.html" %}
+
+{% block container %}
+
+  {% if form.errors %}
+    <p>woops</p>
+  {% endif %}
+
+  <form class="pure-form pure-form-stacked"
+        method="post" action="{% url 'marks.views.register' %}">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <input class="pure-button pure-button-primary" type="submit" value="Register" />
+    <input type="hidden" name="next" value="/" />
+  </form>
+{% endblock %}
