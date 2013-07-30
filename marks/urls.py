@@ -1,15 +1,14 @@
 from django.conf.urls import patterns, include, url
-
-from marks import views
+from django.core.urlresolvers import reverse
 
 urlpatterns = patterns(
     '',
-    url(r'^$', views.index),
-    url(r'^bookmarks/add/$', views.bookmark_add),
-    url(r'^bookmarks/delete/$', views.bookmark_delete),
-    url(r'^accounts/register/$', views.register_user),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
+    url(r'^$', 'marks.views.index', name='index'),
+    url(r'^bookmarks/add/$', 'marks.views.bookmark_add', name='add'),
+    url(r'^bookmarks/delete/$', 'marks.views.bookmark_delete', name='delete'),
+    url(r'^accounts/register/$', 'marks.views.register_user', name='register'),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout_then_login', {
-        'login_url': '/login'
-    }),
+        'login_url': '/accounts/login',
+    }, name='logout'),
 )

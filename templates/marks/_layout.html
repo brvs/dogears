@@ -22,11 +22,12 @@
             <div class="navbar-inner">
               <ul class="nav">
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'marks.views.index' %}">Bookmarks list</a></li>
-                <li><a href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout ({{ user }})</a></li>
+                <li><a href="{% url 'index' %}">Bookmarks list</a></li>
+                <li><a href="{% url 'logout' %}">Logout ({{ user }})</a></li>
                 {% else %}
-                <li><a href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
-                <li><a href="{% url 'marks.views.register_user' %}">Register</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+
                 {% endif %}
               </ul>
             </div>
