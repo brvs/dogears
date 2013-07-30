@@ -2,17 +2,29 @@
 
 {% block container %}
 
+
+<!-- TOOD: do this outside of the template -->
+{% if user.is_authenticated %}
+<script>window.location="/"</script>
+You're already logged in!
+{% else %}
+
+<h2>Register</h2>
+
+
   {% if form.errors %}
     <p>woops</p>
   {% endif %}
 
   <form class="pure-form pure-form-stacked"
-        method="post" action="{% url 'marks.views.register' %}">
+        method="post" action="{% url 'marks.views.register_user' %}">
     {% csrf_token %}
 
     {{ form.as_p }}
 
-    <input class="pure-button pure-button-primary" type="submit" value="Register" />
+    <input class="btn btn-primary" type="submit" value="Register" />
+    <a class="btn btn-info" href="{% url 'django.contrib.auth.views.login' %}">Already have an account?</a>
     <input type="hidden" name="next" value="/" />
   </form>
+{% endif %}
 {% endblock %}

@@ -1,7 +1,7 @@
 import os
 
 from django.conf import global_settings
-
+from django.core.urlresolvers import reverse
 
 # Django settings for dogear project.
 
@@ -163,7 +163,7 @@ LOGGING = {
 }
 
 
-LOGIN_URL = '/login'
+#LOGIN_URL = reverse()
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'marks.context_processors.site',
 )

@@ -1,6 +1,11 @@
+
+import html
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.forms import ModelForm
+
+from marks.utils import webpage_data
 
 
 class Bookmark(models.Model):
@@ -15,8 +20,14 @@ class Bookmark(models.Model):
 
     @classmethod
     def create(cls, user, url):
-        # TODO: Grab title from page
-        return cls(user=user, url=url, title=url)
+        url = ('http://' if url[:7] != 'http://' and url[:8] != 'https://'
+               else '') + url
+        pagedata = webpage_data(url)
+        title = (webpage_data(url).get('title') or url) if pagedata else url
+        return cls(user=user, url=url, title=title)
+
+    class Meta:
+        ordering = ['-date_created']
 
 
 class BookmarkForm(ModelForm):

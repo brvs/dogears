@@ -7,33 +7,59 @@
 
 {% block container %}
 
-<h3>Buttons</h3>
 
-{% include "marks/_bookmarklet.html" %}
+<div class="row-fluid">
+  <div class="span6">
+    <h3>Bookmarks</h3>
 
-<h3>Bookmarks</h3>
+    <form class="form-inline" action="{% url 'marks.views.bookmark_add' %}" method="post">
+      {% csrf_token %}
+      {{ bookmark_form.non_field_errors }}
 
-<form action="/add/" method="post">
-{% csrf_token %}
-{{ bookmark_form.as_p }}
-<input type="submit" class="pure-button pure-button-primary" value="Add"/>
-</form>
+      {{ bookmark_form.url.errors }}
+      <div class="input-prepend input-append">
+        <span class="add-on">http://</span>
+        {{ bookmark_form.url }}
+        <input type="submit" class="btn btn-primary" value="Add"/>
+      </div>
+    </form>
+  </div>
 
-<ul>
-{% for bookmark in bookmarks %}
-<li>
-  <a href="{{ bookmark.url }}">{{ bookmark.title }}</a>
-  <form action="/delete/" method="post">
-    {% csrf_token %}
-    <input type="submit" class="pure-button" value="&times;"/>
-    <input type="hidden" name="id" value="{{ bookmark.pk }}" />
-  </form>
-</li>
-{% endfor %}
-</ul>
+  <div class="span6">
+    <div class="well">
+      <h3>Buttons</h3>
+      {% include "marks/_bookmarklet.html" %}
+    </div>
+  </div>
 
-<hr/>
-{{ site }}
+</div>
+
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <th>URL</th>
+    <th>Created</th>
+    <th>Last accessed</th>
+    <th>Actions</th>
+  </tr>
+  {% for bookmark in bookmarks %}
+  <tr>
+    <td>
+      <a target="_blank" href="{{ bookmark.url }}">{{ bookmark.title }}</a>
+    </td>
+    <td>{{ bookmark.url }}</td>
+    <td>{{ bookmark.date_created }}</td>
+    <td>{{ bookmark.last_accessed }}</td>
+    <td>
+      <form action="{% url 'marks.views.bookmark_delete' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" class="pure-button" value="&times;"/>
+        <input type="hidden" name="id" value="{{ bookmark.pk }}" />
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
 
 
 {% endblock %}

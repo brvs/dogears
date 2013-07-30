@@ -1,4 +1,3 @@
 
-<ul>
-  <li><a href="javascript:window.location={{site.url}}/add?url=window.location&redir=window.location">Dog-ear URL</a></li>
-</ul>
+<a data-toggle="tooltip" data-placement="top" title="Drag me to your bookmarks bar"
+   class="bookmarklet" href="javascript:window.location='{{ site.domain }}{% url 'marks.views.bookmark_add' %}?url='+window.location">Dog-ear URL</a>

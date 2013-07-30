@@ -4,24 +4,59 @@
     <title>
       {% block title %} Dogears {% endblock %}
     </title>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.1/pure-min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css"/>
+    <style>
+      header h1, header h3 { display: inline-block; }
+    </style>
   </head>
   <body>
-    <nav>
-      <p>Logged in as: {{ user }}</p>
-      <ul>
-        <li><a href="/">Bookmarks list</a></li>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/logout">Logout</a></li>
-        <li><a href="/register">Register</a></li>
-      </ul>
-    </nav>
-    <div class="pure-g-r">
-      <div class="pure-u-1">
-        <div style="padding: 1em">
-        {% block container %} {% endblock %}
+    <div class="container">
+      <header class="row-fluid">
+        <div class="span12">
+          <div class="page-header">
+            <h1>dog-ear <small>keeping your bookmarks in the aether!</small></h1>
+          </div>
+          <nav class="navbar">
+            <div class="navbar-inner">
+              <ul class="nav">
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'marks.views.index' %}">Bookmarks list</a></li>
+                <li><a href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout ({{ user }})</a></li>
+                {% else %}
+                <li><a href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
+                <li><a href="{% url 'marks.views.register_user' %}">Register</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <div class="row-fluid">
+        <div class="span12">
+          {% block container %} {% endblock %}
         </div>
       </div>
+
+      <div class="row-fluid">
+          <div class="span12">
+            <hr/>
+            <footer>
+              {{ site }} | &copy; 2013 Brandon Van Slyke
+            </footer>
+          </div>
+      </div>
+
     </div>
+
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script>
+      $('.bookmarklet').click(function(e) {
+        e.preventDefault()
+      })
+    </script>
   </body>
 </html>
