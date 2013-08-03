@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 
 # Django settings for dogear project.
 
-DEBUG = os.environ['DOGEAR_DEBUG']
+DEBUG = os.environ.get('DOGEAR_DEBUG') == 'True'
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
