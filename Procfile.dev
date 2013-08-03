@@ -1,0 +1,1 @@
+web: ~/.venvs/dogear/bin/gunicorn dogear.wsgi:application
