@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 
 # Django settings for dogear project.
 
-DEBUG = True
+DEBUG = os.environ['DOGEAR_DEBUG']
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -17,18 +17,18 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dogear_dev',                      # Or path to database file if using sqlite3.
+        'NAME': os.environ['DOGEAR_DB_NAME'],                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'USER': os.environ['DOGEAR_DB_USER'],
+        'PASSWORD': os.environ['DOGEAR_DB_PASS'],
+        'HOST': os.environ['DOGEAR_DB_HOST'],                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
     }
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ os.environ['DOGEAR_HOST'] ]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -66,11 +66,11 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.environ['DOGEAR_STATIC_ROOT']
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+STATIC_URL = os.environ['DOGEAR_STATIC_URL']
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -88,7 +88,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'TODO: PLACE THIS ELSEWHERE'
+SECRET_KEY = os.environ['DOGEAR_SECRET_KEY']
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
