@@ -34,7 +34,7 @@
 
 </div>
 
-<table class="table">
+<table class="bookmarks table">
   <tr>
     <th>Title</th>
     <th>URL</th>
@@ -45,7 +45,8 @@
   {% for bookmark in bookmarks %}
   <tr>
     <td>
-      <a target="_blank" href="{{ bookmark.url }}">{{ bookmark.title }}</a>
+      <a target="_blank" data-tracking-href="{% url 'marks.views.bookmark_visit' bookmark.pk %}"
+         href="{{ bookmark.url }}">{{ bookmark.title }}</a>
     </td>
     <td>{{ bookmark.url }}</td>
     <td>{{ bookmark.date_created }}</td>

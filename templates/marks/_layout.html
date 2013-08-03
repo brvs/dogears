@@ -58,6 +58,11 @@
       $('.bookmarklet').click(function(e) {
         e.preventDefault()
       })
+
+      $('.bookmarks a').click(function(e) {
+        e.preventDefault()
+        window.location = $(e.target).attr('data-tracking-href')
+      })
     </script>
   </body>
 </html>

@@ -1,4 +1,6 @@
 
+import datetime
+
 from django.contrib.auth import authenticate, forms, login
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
@@ -54,6 +56,16 @@ def bookmark_delete(request):
     return HttpResponseRedirect(reverse(index))
 
 
+@login_required
+def bookmark_visit(request, bookmark_id):
+    if request.method != 'GET':
+        raise Http404
+    bookmark = Bookmark.objects.get(pk=bookmark_id)
+    bookmark.last_accessed = datetime.datetime.now()
+    bookmark.save()
+    return HttpResponseRedirect(bookmark.url)
+
+
 def register_user(request):
     if request.method == 'POST':
         form = forms.UserCreationForm(request.POST)
@@ -69,7 +81,3 @@ def register_user(request):
         'form': form
     })
 
-
-# Take link ID and redirect + log
-def bookmark_visit(request):
-    pass
