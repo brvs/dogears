@@ -1,4 +1,4 @@
-{% extends "marks/_layout.html" %}
+{% extends "bookmarks/_layout.html" %}
 
 {% block container %}
 
@@ -17,7 +17,7 @@ You're already logged in!
   {% endif %}
 
   <form class="pure-form pure-form-stacked"
-        method="post" action="{% url 'marks.views.register_user' %}">
+        method="post" action="{% url 'bookmarks.views.register_user' %}">
     {% csrf_token %}
 
     {{ form.as_p }}

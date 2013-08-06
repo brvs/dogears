@@ -1,5 +1,5 @@
 
-{% extends "marks/_layout.html" %}
+{% extends "bookmarks/_layout.html" %}
 
 {% block title %}
   {{ block.super }} | {{ user }}
@@ -12,7 +12,7 @@
   <div class="span6">
     <h3>Bookmarks</h3>
 
-    <form class="form-inline" action="{% url 'marks.views.bookmark_add' %}" method="post">
+    <form class="form-inline" action="{% url 'bookmarks.views.bookmark_add' %}" method="post">
       {% csrf_token %}
       {{ bookmark_form.non_field_errors }}
 
@@ -28,7 +28,7 @@
   <div class="span6">
     <div class="well">
       <h3>Buttons</h3>
-      {% include "marks/_bookmarklet.html" %}
+      {% include "bookmarks/_bookmarklet.html" %}
     </div>
   </div>
 
@@ -45,14 +45,14 @@
   {% for bookmark in bookmarks %}
   <tr>
     <td>
-      <a target="_blank" data-tracking-href="{% url 'marks.views.bookmark_visit' bookmark.pk %}"
+      <a target="_blank" data-tracking-href="{% url 'bookmarks.views.bookmark_visit' bookmark.pk %}"
          href="{{ bookmark.url }}">{{ bookmark.title }}</a>
     </td>
     <td>{{ bookmark.url }}</td>
     <td>{{ bookmark.date_created }}</td>
     <td>{{ bookmark.last_accessed }}</td>
     <td>
-      <form action="{% url 'marks.views.bookmark_delete' %}" method="post">
+      <form action="{% url 'bookmarks.views.bookmark_delete' %}" method="post">
         {% csrf_token %}
         <input type="submit" class="pure-button" value="&times;"/>
         <input type="hidden" name="id" value="{{ bookmark.pk }}" />

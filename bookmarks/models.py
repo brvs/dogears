@@ -6,7 +6,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
-from marks.utils import webpage_data
+from bookmarks.utils import webpage_data
 
 
 class Bookmark(models.Model):

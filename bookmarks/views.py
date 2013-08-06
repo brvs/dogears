@@ -8,14 +8,14 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 
-from marks.models import Bookmark, BookmarkForm
+from bookmarks.models import Bookmark, BookmarkForm
 
 
 @login_required
 def index(request, bookmark=None):
     if not request.method in ('GET', 'POST'):
         raise Http404
-    return render(request, 'marks/index.html', {
+    return render(request, 'bookmarks/index.html', {
         'bookmarks': Bookmark.objects.filter(user=request.user),
         'bookmark_form': BookmarkForm(instance=bookmark)
     })
@@ -44,7 +44,7 @@ def bookmark_add(request):
         return HttpResponseRedirect(redir)
     except ValidationError as e:
         return list_marks(request, bookmark) if post else render(
-            request, 'marks/bookmarklet_failure.html', { 'redir': redir })
+            request, 'bookmarks/bookmarklet_failure.html', { 'redir': redir })
 
 
 @login_required

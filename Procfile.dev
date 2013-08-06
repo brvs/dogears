@@ -1,1 +1,1 @@
-web: ~/.venvs/dogear/bin/gunicorn dogear.wsgi:application
+web: ~/.venvs/bookmarksproj/bin/gunicorn bookmarksproj.wsgi:application

@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>
-      {% block title %} Dogears {% endblock %}
+      {% block title %} bookmarksapp {% endblock %}
     </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@
       <header class="row-fluid">
         <div class="span12">
           <div class="page-header">
-            <h1>dog-ear <small>keeping your bookmarks in the aether!</small></h1>
+            <h1>bookmarksapp <small>keeping your bookmarks in the aether!</small></h1>
           </div>
           <nav class="navbar">
             <div class="navbar-inner">
@@ -27,7 +27,6 @@
                 {% else %}
                 <li><a href="{% url 'register' %}">Register</a></li>
                 <li><a href="{% url 'login' %}">Login</a></li>
-
                 {% endif %}
               </ul>
             </div>
