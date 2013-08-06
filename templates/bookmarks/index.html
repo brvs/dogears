@@ -27,8 +27,18 @@
 
   <div class="span6">
     <div class="well">
-      <h3>Buttons</h3>
-      {% include "bookmarks/_bookmarklet.html" %}
+      <div class="row-fluid">
+        <div class="span8">
+          <small>Drag this button to your bookmarks bar in your browser. Then, while you're browsing
+            other websites, use your new bookmark button to save your current site to boomarksapp.</small>
+        </div>
+        <div class="span4">
+          <a data-toggle="tooltip" data-placement="top" title="Drag me to your bookmarks bar"
+             class="bookmarklet"
+             href="{{ bookmarklet }}">Bookmark</a>
+        </div>
+      </div>
+
     </div>
   </div>
 

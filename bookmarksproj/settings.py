@@ -165,5 +165,5 @@ LOGGING = {
 
 #LOGIN_URL = reverse()
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    'bookmarks.context_processors.site',
+    'bookmarks.context_processors.context',
 )
