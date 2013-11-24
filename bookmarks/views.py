@@ -1,6 +1,7 @@
 
 import datetime
 
+from django.contrib import messages
 from django.contrib.auth import authenticate, forms, login
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
@@ -35,7 +36,7 @@ def bookmark_add(request):
         url = redir = request.GET.get('url')
     else:
         raise Http404
-    
+
     bookmark = Bookmark.create(request.user, url)
 
     try:
@@ -71,13 +72,15 @@ def register_user(request):
         form = forms.UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(
+                request, messages.INFO,
+                'Registration successful. Please sign in with your new account.')
             return HttpResponseRedirect(reverse(index))
     elif request.method == 'GET':
         form = forms.UserCreationForm()
     else:
         raise Http404
-        
+
     return render(request, 'registration/register.html', {
         'form': form
     })
-
